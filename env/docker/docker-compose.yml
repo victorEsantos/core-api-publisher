@@ -1,0 +1,38 @@
+volumes:
+  curso-hib-pg-data: { }
+  rabbitmq-data: { }
+
+services:
+  aplicacao-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq/
+#    environment:
+#      - RABBITMQ_USERNAME=admin
+#      - RABBITMQ_PASSWORD=admin
+
+  database-postgres:
+    image: sameersbn/postgresql:10-1
+    restart: always
+    environment:
+      DB_NAME: cursoHib, cursoHib-dev
+      DB_USER: postgres
+      DB_PASS: adm@123
+      PG_PASSWORD: adm@123
+    ports:
+      - 5432:5432
+    volumes:
+      - curso-hib-pg-data:/var/lib/postgresql
+
+  database-pg-admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@dev.com.br
+      PGADMIN_DEFAULT_PASSWORD: dev
+    ports:
+      - 8000:80
