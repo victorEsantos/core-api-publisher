@@ -41,9 +41,6 @@ public class DBService
 	private ProdutoRepository produtoRepository;
 
 	@Autowired
-	private EstadoRepository estadoRepository;
-
-	@Autowired
 	private CidadeRepository cidadeRepository;
 
 	@Autowired
@@ -108,18 +105,12 @@ public class DBService
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5 , p6, p7, p8, p9, p10, p11));
 
-		Estado est1 = new Estado(null, "Minas Gerais");
-		Estado est2 = new Estado(null, "São Paulo");
+		Estado est1 = Estado.MG;
+		Estado est2 = Estado.SP;
 
 		Cidade c1 = new Cidade(null, "Uberlandia", est1);
 		Cidade c2 = new Cidade(null, "São Paulo", est2);
 		Cidade c3 = new Cidade(null, "Campinas", est2);
-
-		est1.setCidades(Arrays.asList(c1));
-		est2.setCidades(Arrays.asList(c2, c3));
-
-		estadoRepository.saveAll(Arrays.asList(est1, est2));
-		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
 		Cliente cli1 = new Cliente(null, "Maria silva", "victor.sk8.santos@gmail.com", "19344569704",
 			TipoCliente.PESSOAFISICA, pe.encode("123"));
@@ -140,6 +131,7 @@ public class DBService
 		cli1.setEnderecos(Arrays.asList(e1, e2));
 		cli2.setEnderecos(Arrays.asList(e3));
 
+		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
 		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
@@ -151,14 +143,14 @@ public class DBService
 				.cliente(cli1)
 				.enderecoDeEntrega(e1)
 				.build();
-		
+
 		var ped2 = Pedido.builder()
 				.id(null)
 				.instante(sdf.parse("10/10/2020 08:22"))
 				.cliente(cli1)
 				.enderecoDeEntrega(e2)
 				.build();
-		
+
 
 		var pagto1 = PagamentoComCartao
 				.builder()

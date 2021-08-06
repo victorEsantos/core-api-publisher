@@ -6,8 +6,8 @@ import com.core.api.cliente.domain.enums.TipoCliente;
 import com.core.api.endereco.domain.Endereco;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.core.api.pedido.domain.Pedido;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,8 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Cliente implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -58,6 +57,7 @@ public class Cliente implements Serializable
 		addPerfil(Perfil.CLIENTE);
 	}
 
+	@Builder
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente, String senha)
 	{
 		super();
@@ -73,8 +73,7 @@ public class Cliente implements Serializable
 
 	public TipoCliente getTipoCliente()
 	{
-		TipoCliente tc = TipoCliente.getSafeTipoCliente(this.tipoCliente);
-		return tc;
+		return TipoCliente.getSafeTipoCliente(this.tipoCliente);
 	}
 
 	public void setTipoCliente(TipoCliente tipoCliente)
