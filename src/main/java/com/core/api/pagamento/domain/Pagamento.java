@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,7 +25,7 @@ public abstract class Pagamento implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer id;
+	private UUID id;
 	private Integer estadoPagamento;
 
 	//@JsonBackReference
