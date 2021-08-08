@@ -11,7 +11,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -24,7 +27,7 @@ public class Produto implements Serializable
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private UUID id;
+	private Integer id;
 	private String nome;
 	private Double preco;
 
@@ -52,12 +55,12 @@ public class Produto implements Serializable
 		return pedidosList;
 	}
 
-	public UUID getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(UUID id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}

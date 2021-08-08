@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -22,14 +21,14 @@ public class Categoria implements Serializable
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private UUID id;
+	private Integer id;
 	private String nome;
 
 	//JsonManagedReference para com referencia ciclica, porem dava alguns problemas com json e foi usado apenas um @JsonIgnore no backReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 
-	public Categoria(UUID id, String nome)
+	public Categoria(Integer id, String nome)
 	{
 		super();
 		this.id = id;
