@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PedidoService
@@ -88,7 +89,7 @@ public class PedidoService
 			throw new AuthorizationException("Acesso negado");
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-		Cliente cliente = clienteService.find(user.getId());
+		Cliente cliente = clienteService.find(UUID.fromString(user.getId()));
 		return pedidoRepository.findByCliente(cliente, pageRequest);
 	}
 

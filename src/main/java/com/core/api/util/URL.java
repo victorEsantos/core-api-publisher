@@ -7,22 +7,23 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class URL
 {
 	private static Logger LOG = LoggerFactory.getLogger(URL.class);
 
-	public static List<Integer> decodeIntList(String s)
+	public static List<UUID> decodeStringList(String s)
 	{
 
-		String[] intList = s.split(",");
-		List<Integer> integerList = new ArrayList<>();
-		for (String uniqueValue : intList)
+		String[] stringList = s.split(",");
+		List<UUID> uuidList = new ArrayList<>();
+		for (String uniqueValue : stringList)
 		{
-			integerList.add(Integer.parseInt(uniqueValue));
+			uuidList.add(UUID.fromString(uniqueValue));
 		}
 
-		return integerList;
+		return uuidList;
 	}
 
 	public static String decodeString(String string)

@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ClienteService
@@ -42,7 +43,7 @@ public class ClienteService
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 
-	public Cliente find(Integer id)
+	public Cliente find(UUID id)
 	{
 
 		UserSS user = UserService.authenticated();
@@ -98,7 +99,7 @@ public class ClienteService
 
 	public Cliente cliFromDTO(ClienteDTO clienteDTO)
 	{
-		return new Cliente(clienteDTO.getId(), clienteDTO.getName(), clienteDTO.getEmail(), null,
+		return new Cliente(UUID.fromString(clienteDTO.getId()), clienteDTO.getName(), clienteDTO.getEmail(), null,
 			null, null);
 	}
 

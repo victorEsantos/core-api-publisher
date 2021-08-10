@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProdutoService
@@ -23,15 +24,15 @@ public class ProdutoService
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
-	public Produto buscar(Integer id)
+	public Produto buscar(UUID id)
 	{
 		Optional<Produto> obj = produtoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 			"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
 
-	public Page<Produto> search(String name, List<Integer> ids, Integer page, Integer linesPerPage,
-		String orderBy, String direction)
+	public Page<Produto> search(String name, List<UUID> ids, Integer page, Integer linesPerPage,
+								String orderBy, String direction)
 	{
 		PageRequest pageRequest = PageRequest
 			.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);

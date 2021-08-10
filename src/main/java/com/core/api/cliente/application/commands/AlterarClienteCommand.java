@@ -3,10 +3,12 @@ package com.core.api.cliente.application.commands;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 public class AlterarClienteCommand {
-    private final Integer id;
+    private final UUID id;
     private final String nome;
     private final String email;
     private final String cpfOuCnpj;

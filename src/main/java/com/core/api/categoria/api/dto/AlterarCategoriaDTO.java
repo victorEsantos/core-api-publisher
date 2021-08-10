@@ -18,7 +18,7 @@ public class AlterarCategoriaDTO implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-	private Integer id;
+	private String id;
 
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min = 5, max = 80, message = "o tamanho deve ser entre 5 e 80 caracteres")
@@ -26,7 +26,7 @@ public class AlterarCategoriaDTO implements Serializable
 
 	public AlterarCategoriaDTO(Categoria categoria)
 	{
-		this.id = categoria.getId();
+		this.id = categoria.getId().toString();
 		this.nome = categoria.getNome();
 	}
 }

@@ -16,12 +16,12 @@ public class UserSS implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Getter
-    private Integer id;
+    private String id;
     private String email;
     private String senha;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
+    public UserSS(String id, String email, String senha, Set<Perfil> perfis) {
         this.id = id;
         this.email = email;
         this.senha = senha;

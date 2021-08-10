@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -64,9 +65,9 @@ public class ClienteController
 
 	//@GetMapping
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@PathVariable Integer id)
+	public ResponseEntity<Cliente> find(@PathVariable String id)
 	{
-		Cliente obj = service.find(id);
+		Cliente obj = service.find(UUID.fromString(id));
 
 		return ResponseEntity.ok().body(obj);
 	}
@@ -99,9 +100,9 @@ public class ClienteController
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id)
+	public ResponseEntity<Void> delete(@PathVariable String id)
 	{
-		var cmd = RemoverClienteCommand.of(id);
+		var cmd = RemoverClienteCommand.of(UUID.fromString(id));
 		service.handle(cmd);
 
 		return ResponseEntity.noContent().build();

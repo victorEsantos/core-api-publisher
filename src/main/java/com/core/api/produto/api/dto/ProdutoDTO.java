@@ -14,13 +14,13 @@ public class ProdutoDTO implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String id;
 	private String nome;
 	private Double preco;
 
 	public ProdutoDTO(Produto produto)
 	{
-		this.id = produto.getId();
+		this.id = produto.getId().toString();
 		this.nome = produto.getNome();
 		this.preco = produto.getPreco();
 	}

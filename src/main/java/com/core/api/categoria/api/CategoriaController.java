@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,9 +33,9 @@ public class CategoriaController
 	private ValidateService validator;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Categoria> find(@PathVariable Integer id)
+	public ResponseEntity<Categoria> find(@PathVariable String id)
 	{
-		Categoria obj = service.find(id);
+		Categoria obj = service.find(UUID.fromString(id));
 		return ResponseEntity.ok().body(obj);
 	}
 
@@ -71,7 +72,7 @@ public class CategoriaController
 
 		var cmd = AlterarCategoriaCommand
 				.builder()
-				.id(dto.getId())
+				.id(UUID.fromString(dto.getId()))
 				.nome(dto.getNome())
 				.build();
 		service.handle(cmd);
@@ -81,9 +82,9 @@ public class CategoriaController
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id)
+	public ResponseEntity<Void> delete(@PathVariable String id)
 	{
-		var cmd = RemoverCategoriaCommand.of(id);
+		var cmd = RemoverCategoriaCommand.of(UUID.fromString(id));
 		service.handle(cmd);
 
 		return ResponseEntity.noContent().build();

@@ -11,10 +11,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -22,9 +19,9 @@ import java.util.stream.Collectors;
 public class Cliente implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Integer id;
+	private UUID id;
 	private String nome;
 
 	@Column(unique = true)
@@ -58,7 +55,7 @@ public class Cliente implements Serializable
 	}
 
 	@Builder
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente, String senha)
+	public Cliente(UUID id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente, String senha)
 	{
 		super();
 		this.id = id;

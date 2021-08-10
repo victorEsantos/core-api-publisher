@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/produtos")
@@ -20,9 +21,9 @@ public class ProdutoController
 
 	//@GetMapping
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Produto> find(@PathVariable Integer id)
+	public ResponseEntity<Produto> find(@PathVariable String id)
 	{
-		Produto obj = produtoService.buscar(id);
+		Produto obj = produtoService.buscar(UUID.fromString(id));
 
 		return ResponseEntity.ok().body(obj);
 	}
@@ -38,7 +39,7 @@ public class ProdutoController
 		@RequestParam(value = "direction", defaultValue = "ASC") String direction)
 	{
 		String decodedName = URL.decodeString(nome);
-		List<Integer> ids = URL.decodeIntList(categorias);
+		List<UUID> ids = URL.decodeStringList(categorias);
 
 		Page<Produto> objList = produtoService.search(decodedName, ids, page, linesPerPage, orderBy, direction);
 		Page<ProdutoDTO> dtoObjList = objList.map(obj -> new ProdutoDTO(obj));

@@ -17,7 +17,7 @@ public class Cidade implements Serializable
 
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Integer id;
 	private String nome;

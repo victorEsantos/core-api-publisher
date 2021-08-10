@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CategoriaService
@@ -24,7 +25,7 @@ public class CategoriaService
 	@Autowired
 	private CategoriaRepository repo;
 
-	public Categoria find(Integer id)
+	public Categoria find(UUID id)
 	{
 		Optional<Categoria> obj = repo.findById(id);
 

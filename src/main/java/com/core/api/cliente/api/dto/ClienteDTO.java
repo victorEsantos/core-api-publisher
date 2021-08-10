@@ -17,7 +17,7 @@ public class ClienteDTO implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private String id;
 	@NotEmpty(message = "Preenchimento Obrigatório")
 	@Length(min = 5, max = 80, message = "deve ter entre 5 e 80 caracteres")
 	private String name;
@@ -27,7 +27,7 @@ public class ClienteDTO implements Serializable
 
 	public ClienteDTO(Cliente cliente)
 	{
-		this.id = cliente.getId();
+		this.id = cliente.getId().toString();
 		this.name = cliente.getNome();
 		this.email = cliente.getEmail();
 	}
