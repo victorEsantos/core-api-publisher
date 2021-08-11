@@ -53,7 +53,7 @@ public class ClienteController
 				.bairro(dto.getBairro())
 				.cep(dto.getCep())
 				.telefone1(dto.getTelefone1())
-				.cidadeId(dto.getCidadeId())
+				.cidadeId(UUID.fromString(dto.getCidadeId()))
 				.build();
 
 		var obj = service.handle(cmd);
@@ -90,7 +90,7 @@ public class ClienteController
 				.bairro(dto.getBairro())
 				.cep(dto.getCep())
 				.telefone1(dto.getTelefone1())
-				.cidadeId(dto.getCidadeId())
+				.cidadeId(UUID.fromString(dto.getCidadeId()))
 				.build();
 
 		service.handle(cmd);

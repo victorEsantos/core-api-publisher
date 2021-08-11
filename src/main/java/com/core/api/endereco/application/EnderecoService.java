@@ -16,6 +16,8 @@ import com.core.api.security.userss.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class EnderecoService
 {
@@ -26,7 +28,7 @@ public class EnderecoService
 	@Autowired
 	private CidadeRepository cidadeRepository;
 
-	public Endereco findEndereco(Integer id)
+	public Endereco findEndereco(UUID id)
 	{
 
 		UserSS user = UserService.authenticated();
@@ -41,7 +43,7 @@ public class EnderecoService
 			"Objeto não encontrado! Id: " + id + ", Tipo: " + Endereco.class.getName()));
 	}
 
-	public Cidade findCidade(Integer id)
+	public Cidade findCidade(UUID id)
 	{
 
 		var obj = cidadeRepository.findById(id);

@@ -45,5 +45,5 @@ public class CriarClienteDTO implements Serializable
 	private String telefone2;
 	private String telefone3;
 
-	private Integer cidadeId;
+	private String cidadeId;
 }

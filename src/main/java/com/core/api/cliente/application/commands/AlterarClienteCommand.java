@@ -20,5 +20,5 @@ public class AlterarClienteCommand {
     private final String bairro;
     private final String cep;
     private final String telefone1;
-    private final Integer cidadeId;
+    private final UUID cidadeId;
 }

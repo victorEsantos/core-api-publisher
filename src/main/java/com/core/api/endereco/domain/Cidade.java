@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Cidade implements Serializable
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Integer id;
+	private UUID id;
 	private String nome;
 
 	@Enumerated(EnumType.STRING)

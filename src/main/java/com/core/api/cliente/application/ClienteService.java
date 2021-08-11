@@ -109,7 +109,7 @@ public class ClienteService
 			criarClienteDTO.getCpfOuCnpj(),
 			TipoCliente.getSafeTipoCliente(criarClienteDTO.getTipoCliente()), pe.encode(criarClienteDTO.getSenha()));
 
-		Cidade cidade = new Cidade(criarClienteDTO.getCidadeId(), null, null);
+		Cidade cidade = new Cidade(UUID.fromString(criarClienteDTO.getCidadeId()), null, null);
 
 		Endereco end = new Endereco(null, criarClienteDTO.getLogradouro(), criarClienteDTO.getNumero(),
 			criarClienteDTO.getComplemento(), criarClienteDTO.getBairro(), criarClienteDTO.getCep(), cli,

@@ -3,6 +3,8 @@ package com.core.api.cliente.application.commands;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 public class CriarClienteCommand {
@@ -17,5 +19,5 @@ public class CriarClienteCommand {
     private final String bairro;
     private final String cep;
     private final String telefone1;
-    private final Integer cidadeId;
+    private final UUID cidadeId;
 }

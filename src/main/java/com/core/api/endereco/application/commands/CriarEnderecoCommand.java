@@ -14,5 +14,5 @@ public class CriarEnderecoCommand {
     private String bairro;
     private String cep;
     private UUID clienteId;
-    private Integer cidadeId;
+    private UUID cidadeId;
 }

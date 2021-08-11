@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,7 +21,7 @@ public class Endereco implements Serializable
 	private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Integer id;
+	private UUID id;
 	private String logradouro;
 	private String numero;
 	private String complemento;
