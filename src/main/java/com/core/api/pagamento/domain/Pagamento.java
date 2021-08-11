@@ -27,7 +27,8 @@ public abstract class Pagamento implements Serializable
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private UUID id;
-	private Integer estadoPagamento;
+	@Enumerated(EnumType.STRING)
+	private EstadoPagamento estadoPagamento;
 
 	//@JsonBackReference
 	@JsonIgnore
@@ -38,12 +39,12 @@ public abstract class Pagamento implements Serializable
 
 	public EstadoPagamento getEstadoPagamento()
 	{
-		return EstadoPagamento.getSafeEstadoPagamento(estadoPagamento);
+		return estadoPagamento;
 	}
 
 	public void setEstadoPagamento(EstadoPagamento estadoPagamento)
 	{
-		this.estadoPagamento = estadoPagamento.getCode();
+		this.estadoPagamento = estadoPagamento;
 	}
 
 	@Override

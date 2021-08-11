@@ -155,7 +155,7 @@ public class DBService
 		var pagto1 = PagamentoComCartao
 				.builder()
 				.id(null)
-				.estadoPagamento(EstadoPagamento.QUITADO.getCode())
+				.estadoPagamento(EstadoPagamento.QUITADO)
 				.pedido(ped1)
 				.numeroDeParcelas(6)
 				.build();
@@ -164,7 +164,7 @@ public class DBService
 		var pagto2 = PagamentoComBoleto
 				.builder()
 				.id(null)
-				.estadoPagamento(EstadoPagamento.PENDENTE.getCode())
+				.estadoPagamento(EstadoPagamento.PENDENTE)
 				.pedido(ped2)
 				.dataVencimento(sdf.parse("20/10/2020 00:00"))
 				.dataPagamento(null)
