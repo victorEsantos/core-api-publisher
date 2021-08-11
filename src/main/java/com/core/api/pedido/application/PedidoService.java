@@ -50,7 +50,7 @@ public class PedidoService
 	@Autowired
 	private EmailService emailService;
 
-	public Pedido buscar(Integer id)
+	public Pedido buscar(UUID id)
 	{
 		Optional<Pedido> obj = pedidoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(

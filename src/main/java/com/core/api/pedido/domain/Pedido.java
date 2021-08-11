@@ -13,10 +13,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -29,7 +26,7 @@ public class Pedido implements Serializable
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Integer id;
+	private UUID id;
 
 	@JsonFormat(pattern = "dd/mm/yyyy HH:mm")
 	private Date instante;

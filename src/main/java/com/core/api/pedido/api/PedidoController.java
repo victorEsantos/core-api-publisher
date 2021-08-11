@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/pedidos")
@@ -21,9 +22,9 @@ public class PedidoController
 
 	//@GetMapping
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Pedido> find(@PathVariable Integer id)
+	public ResponseEntity<Pedido> find(@PathVariable String id)
 	{
-		Pedido obj = service.buscar(id);
+		Pedido obj = service.buscar(UUID.fromString(id));
 
 		return ResponseEntity.ok().body(obj);
 	}
