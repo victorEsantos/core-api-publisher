@@ -27,7 +27,9 @@ public class Cliente implements Serializable
 	@Column(unique = true)
 	private String email;
 	private String cpfOuCnpj;
-	private Integer tipoCliente;
+
+	@Enumerated(EnumType.STRING)
+	private TipoCliente tipoCliente;
 
 	@JsonIgnore
 	private String senha;
@@ -62,7 +64,7 @@ public class Cliente implements Serializable
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipoCliente = tipoCliente == null ? null : tipoCliente.getCode();
+		this.tipoCliente = tipoCliente;
 		this.senha = senha;
 		addPerfil(Perfil.CLIENTE);
 	}
@@ -70,12 +72,12 @@ public class Cliente implements Serializable
 
 	public TipoCliente getTipoCliente()
 	{
-		return TipoCliente.getSafeTipoCliente(this.tipoCliente);
+		return this.tipoCliente;
 	}
 
 	public void setTipoCliente(TipoCliente tipoCliente)
 	{
-		this.tipoCliente = tipoCliente.getCode();
+		this.tipoCliente = tipoCliente;
 	}
 
 	public Set<Perfil> getPerfis() {
