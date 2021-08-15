@@ -9,6 +9,8 @@ import com.core.api.cliente.domain.Cliente;
 import com.core.api.cliente.application.ClienteService;
 import com.core.api.cliente.exception.CriarClienteConstraintException;
 import com.core.api.util.ValidateService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/clientes")
+@Api(value = "cliente controller")
+@CrossOrigin(origins = "*")
 public class ClienteController
 {
 	@Autowired
@@ -32,7 +36,8 @@ public class ClienteController
 	@Autowired
 	private ValidateService validator;
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
+	@ApiOperation(value = "Obtem categoria pelo ID")
 	public ResponseEntity<Void> insert(@Valid @RequestBody CriarClienteDTO dto)
 	{
 
@@ -64,7 +69,8 @@ public class ClienteController
 	}
 
 	//@GetMapping
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
+	@ApiOperation(value = "Obtem cliente pelo ID")
 	public ResponseEntity<Cliente> find(@PathVariable String id)
 	{
 		Cliente obj = service.find(UUID.fromString(id));
@@ -72,7 +78,8 @@ public class ClienteController
 		return ResponseEntity.ok().body(obj);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@PutMapping(value = "/{id}")
+	@ApiOperation(value = "Atualiza dados do cliente")
 	public ResponseEntity<Void> update(@Valid @RequestBody CriarClienteDTO dto,
 		@PathVariable Integer id)
 	{
@@ -99,7 +106,8 @@ public class ClienteController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/{id}")
+	@ApiOperation(value = "Deleta cliente pelo ID")
 	public ResponseEntity<Void> delete(@PathVariable String id)
 	{
 		var cmd = RemoverClienteCommand.of(UUID.fromString(id));
@@ -109,7 +117,8 @@ public class ClienteController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
+	@ApiOperation(value = "Obtem todos os clientes")
 	public ResponseEntity<List<ClienteDTO>> findAll()
 	{
 		List<Cliente> objList = service.findAll();
@@ -120,7 +129,8 @@ public class ClienteController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@GetMapping(value = "/page")
+	@ApiOperation(value = "Obtem clientes filtrados")
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 		@RequestParam(value = "page", defaultValue = "0") Integer page,
 		@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,

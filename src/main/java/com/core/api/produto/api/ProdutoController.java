@@ -4,6 +4,8 @@ import com.core.api.util.URL;
 import com.core.api.produto.api.dto.ProdutoDTO;
 import com.core.api.produto.domain.Produto;
 import com.core.api.produto.application.ProdutoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +16,16 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/produtos")
+@Api(value = "produto controller")
+@CrossOrigin(origins = "*")
 public class ProdutoController
 {
 	@Autowired
 	private ProdutoService produtoService;
 
 	//@GetMapping
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
+	@ApiOperation(value = "Obtem produto pelo ID")
 	public ResponseEntity<Produto> find(@PathVariable String id)
 	{
 		Produto obj = produtoService.buscar(UUID.fromString(id));
@@ -29,7 +34,8 @@ public class ProdutoController
 	}
 
 	//para alterar o endPoint bastar colocar um "value = "/page" " dentro de requestMapping
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
+	@ApiOperation(value = "Obtem produtos filtrados")
 	public ResponseEntity<Page<ProdutoDTO>> findPage(
 		@RequestParam(value = "nome", defaultValue = "") String nome,
 		@RequestParam(value = "categorias", defaultValue = "") String categorias,

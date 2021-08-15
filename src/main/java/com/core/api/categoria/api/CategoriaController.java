@@ -9,6 +9,8 @@ import com.core.api.categoria.application.commands.RemoverCategoriaCommand;
 import com.core.api.categoria.domain.Categoria;
 import com.core.api.categoria.application.CategoriaService;
 import com.core.api.util.ValidateService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/categorias")
+@Api(value = "categoria controller")
+@CrossOrigin(origins = "*")
 public class CategoriaController
 {
 	@Autowired
@@ -32,7 +36,8 @@ public class CategoriaController
 	@Autowired
 	private ValidateService validator;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
+	@ApiOperation(value = "Obtem categoria pelo ID")
 	public ResponseEntity<Categoria> find(@PathVariable String id)
 	{
 		Categoria obj = service.find(UUID.fromString(id));
@@ -40,7 +45,8 @@ public class CategoriaController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
+	@ApiOperation(value = "Cria nova categoria")
 	public ResponseEntity<Void> insert(@Valid @RequestBody CriarCategoriaDTO dto)
 	{
 
@@ -62,7 +68,8 @@ public class CategoriaController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@PutMapping(value = "/{id}")
+	@ApiOperation(value = "Atualiza categoria")
 	public ResponseEntity<Void> update(@Valid @RequestBody AlterarCategoriaDTO dto, @PathVariable Integer id)
 	{
 
@@ -81,7 +88,8 @@ public class CategoriaController
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/{id}")
+	@ApiOperation(value = "Deleta categoria pelo ID")
 	public ResponseEntity<Void> delete(@PathVariable String id)
 	{
 		var cmd = RemoverCategoriaCommand.of(UUID.fromString(id));
@@ -90,7 +98,8 @@ public class CategoriaController
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
+	@ApiOperation(value = "Obtem todas as categorias")
 	public ResponseEntity<List<CriarCategoriaDTO>> findAll()
 	{
 		List<Categoria> objList = service.findAll();
@@ -100,7 +109,8 @@ public class CategoriaController
 		return ResponseEntity.ok().body(dtoObjList);
 	}
 
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@GetMapping(value = "/page")
+	@ApiOperation(value = "Obtem categorias filtradas")
 	public ResponseEntity<Page<CriarCategoriaDTO>> findPage(
 		@RequestParam(value = "page", defaultValue = "0") Integer page,
 		@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,

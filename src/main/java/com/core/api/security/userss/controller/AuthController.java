@@ -5,18 +5,19 @@ import com.core.api.security.JWTUtil;
 import com.core.api.security.userss.UserSS;
 import com.core.api.security.service.AuthService;
 import com.core.api.security.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+@Api(value = "autenticação user")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
@@ -25,7 +26,8 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value="/refresh_token", method= RequestMethod.POST)
+    @PostMapping(value="/refresh_token")
+    @ApiOperation(value = "Gera novo token")
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
         UserSS user = UserService.authenticated();
         String token = jwtUtil.generateToken(user.getUsername());
@@ -33,7 +35,8 @@ public class AuthController {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value="/forgot", method= RequestMethod.POST)
+    @PostMapping(value="/forgot")
+    @ApiOperation(value = "Recupera a senha")
     public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDTO) {
         authService.sendNewPassWord(objDTO.getEmail());
 
